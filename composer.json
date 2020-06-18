@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">= 7.4.0",
-        "nyholm/psr7-server": "^1.0",
+        "nyholm/psr7-server": "^1.0.0",
         "lobster-php/error-handler": "^1.0"
     }
 }
