@@ -49,7 +49,7 @@ class RequestHandlerRunner
 
         catch (\Throwable $e)
         {
-            $response = ($this->generator)($e, $request);
+            $response = $this->generator->generate($e, $request);
         }
 
         $this->emitter->emit($response);
