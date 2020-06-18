@@ -20,13 +20,6 @@ class RequestHandlerRunner
     private ServerRequestCreator $creator;
     private Contracts\ErrorResponseGenerator $generator;
 
-    /**
-     * RequestHandlerRunner constructor.
-     * @param RequestHandlerInterface $handler
-     * @param EmitterInterface $emitter
-     * @param ServerRequestCreator $creator
-     * @param Contracts\ErrorResponseGenerator $generator
-     */
     public function __construct(RequestHandlerInterface $handler, EmitterInterface $emitter,
         ServerRequestCreator $creator, Contracts\ErrorResponseGenerator $generator)
     {
