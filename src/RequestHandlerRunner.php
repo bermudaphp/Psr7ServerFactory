@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Lobster;
+namespace Bermuda\RequestHandlerRunner;
 
 
 use Nyholm\Psr7Server\ServerRequestCreator;
@@ -11,7 +11,7 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 
 /**
  * Class RequestHandlerRunner
- * @package Lobster\Http
+ * @package Bermuda\RequestHandlerRunner
  */
 class RequestHandlerRunner
 {
