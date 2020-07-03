@@ -1,14 +1,15 @@
  {
-    "name": "lobster-php/runner",
+    "name": "bermudaphp/runner-factory",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Lobster\\": "src/"
+            "Bermuda\\RequestHandlerRunner": "src/"
         }
     },
     "require": {
-        "php": ">= 7.4.0",
+        "php": ">= 7.4",
         "nyholm/psr7-server": "^1.0.0",
-        "lobster-php/error-handler": "^1.0"
+        "bermudaphp/error-handler": "^1.0",
+        "psr/container": "^1.0"
     }
 }
