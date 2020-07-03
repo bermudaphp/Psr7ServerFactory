@@ -17,7 +17,7 @@ final class EmitterFactory
     {
         $stack = new EmitterStack();
         
-        $stack->push(new SapiEmitter)
+        $stack->push(new SapiEmitter);
         $stack->push(new class(new SapiStreamEmitter($this->getMaxBufferLength($c)) implements EmitterInterface
         {
             private $emitter;
