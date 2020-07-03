@@ -6,6 +6,7 @@ namespace Bermuda\RequestHandlerRunner;
 
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Server\RequestHandlerInterface;
+use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 
 
@@ -13,7 +14,7 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
  * Class RequestHandlerRunner
  * @package Bermuda\RequestHandlerRunner
  */
-class RequestRunnerFactory
+final class RequestRunnerFactory
 {
     public function __invoke(ContainerInterface $c): RequestHandlerRunner
     {
