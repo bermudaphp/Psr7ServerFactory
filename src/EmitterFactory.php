@@ -11,7 +11,6 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiStreamEmitter;
 
 
-
 final class EmitterFactory
 {
     public function __invoke(ContainerInterface $c): EmitterInterface
