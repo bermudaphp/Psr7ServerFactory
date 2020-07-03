@@ -30,7 +30,7 @@ final class RequestRunnerFactory
             return $c->get(EmitterInterface::class);
         }
         
-        return (new EmitterFactory)($c)
+        return (new EmitterFactory)($c);
     }
     
     private function getServerRequestFactory(ContainerInterface $c): callable
