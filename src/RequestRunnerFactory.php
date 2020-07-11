@@ -14,7 +14,7 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
  * Class RequestHandlerRunner
  * @package Bermuda\RequestHandlerRunner
  */
-final class RequestRunnerFactory
+final class RequestHandlerRunnerFactory
 {
     public function __invoke(ContainerInterface $c): RequestHandlerRunner
     {
