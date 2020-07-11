@@ -12,7 +12,7 @@ final class ConfigProvider
 {
     public function __invoke(): array
     {
-        return ['dependencies' => [ 'factories' => [
+        return ['dependencies' => ['factories' => [
                     EmitterInterface::class => EmitterFactory::class, 
                     RequestHandlerRunner::class => RequestHandlerRunnerFactory::class'
                 ]]
