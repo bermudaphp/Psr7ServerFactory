@@ -20,12 +20,12 @@ final class RequestHandlerRunnerFactory
 {
     public function __invoke(ContainerInterface $c): RequestHandlerRunner
     {
-       return new RequestHandlerRunner($c->get(PipelineInterface::class), $this->getEmitter($c), 
+       return new RequestHandlerRunner($c->get(PipelineInterface::class), $this->getEmitter($c),
             $this->getServerRequestFactory($c), $this->getErrorResponseGenerator($c)
        );
     }
     
-    private function getEmitter(ContainerInterface $c): EmmiterInterface
+    private function getEmitter(ContainerInterface $c): EmitterInterface
     {
         if($c->has(EmitterInterface::class))
         {
@@ -37,9 +37,9 @@ final class RequestHandlerRunnerFactory
     
     private function getServerRequestFactory(ContainerInterface $c): callable
     {
-        if($container->has('serverRequestFactory'))
+        if($c->has('serverRequestFactory'))
         {
-            return $container->get('serverRequestFactory');
+            return $c->get('serverRequestFactory');
         }
         
         return [$this->getServerRequestCreator(), 'fromGlobals'];
@@ -58,6 +58,6 @@ final class RequestHandlerRunnerFactory
     private function getServerRequestCreator(): ServerRequestCreator
     {
         $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
-        return [new ServerRequestCreator($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory), 'fromGlobals'];
+        return new ServerRequestCreator($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
     }
 }
