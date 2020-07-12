@@ -46,7 +46,9 @@ final class RequestHandlerRunnerFactory
     
     private function getErrorResponseGenerator(ContainerInterface $c): callable
     {
-        return function(\Throwable $e) use ($generator = $c->get(ErrorResponseGeneratorInterface::class)): ResponseInterface
+        $generator = $c->get(ErrorResponseGeneratorInterface::class);
+
+        return function(\Throwable $e) use ($generator): ResponseInterface
         {
             return $generator->generate($e, $this->getServerRequestCreator->fromGlobals());
         };
