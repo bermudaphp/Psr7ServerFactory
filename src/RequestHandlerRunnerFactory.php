@@ -4,6 +4,7 @@
 namespace Bermuda\RequestHandlerRunner;
 
 
+use Bermuda\Pipeline\PipelineInterface;
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\HttpHandlerRunner\RequestHandlerRunner;
@@ -18,7 +19,7 @@ final class RequestHandlerRunnerFactory
 {
     public function __invoke(ContainerInterface $c): RequestHandlerRunner
     {
-       return new RequestHandlerRunner($c->get('requestHandler'), $this->getEmitter($c), 
+       return new RequestHandlerRunner($c->get(PipelineInterface::class), $this->getEmitter($c), 
             $this->getServerRequestFactory($c), $this->getErrorResponseGenerator($c)
        );
     }
