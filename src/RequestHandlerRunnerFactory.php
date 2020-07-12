@@ -4,6 +4,7 @@
 namespace Bermuda\RequestHandlerRunner;
 
 
+use Bermuda\ErrorHandler\ErrorResponseGeneratorInterface;
 use Psr\Container\ContainerInterface;
 use Bermuda\Pipeline\PipelineInterface;
 use Nyholm\Psr7Server\ServerRequestCreator;
