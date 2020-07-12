@@ -1,4 +1,4 @@
 # Install
 ```bash
-composer require bermudaphp/runner-factory
+composer require bermudaphp/http-factories
 ````
