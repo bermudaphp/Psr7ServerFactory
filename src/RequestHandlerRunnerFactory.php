@@ -11,7 +11,7 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 
 
 /**
- * Class RequestHandlerRunner
+ * Class RequestHandlerRunnerFactory
  * @package Bermuda\RequestHandlerRunner
  */
 final class RequestHandlerRunnerFactory
