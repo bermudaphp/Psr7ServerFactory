@@ -12,6 +12,10 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiStreamEmitter;
 
 
+/**
+ * Class EmitterFactory
+ * @package Bermuda\RequestHandlerRunner
+ */
 final class EmitterFactory
 {
     public function __invoke(ContainerInterface $c): EmitterInterface
