@@ -48,11 +48,4 @@ final class RequestHandlerRunnerFactory
         
         return new ServerRequestFactory;
     }
-    
-    
-    private function getServerRequestCreator(): ServerRequestCreator
-    {
-        $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
-        return new ServerRequestCreator($psr17Factory, $psr17Factory, $psr17Factory, $psr17Factory);
-    }
 }
