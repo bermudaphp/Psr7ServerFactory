@@ -22,7 +22,10 @@ final class RequestHandlerRunnerFactory
     public function __invoke(ContainerInterface $c): RequestHandlerRunner
     {
        return new RequestHandlerRunner($c->get(PipelineInterface::class), $this->getEmitter($c),
-            $this->getServerRequestFactory($c), $this->getErrorResponseGenerator($c)
+            $this->getServerRequestFactory($c), static function(\Throwable $e) use ($c): ResponseInterface
+            {
+                return $c->get(ErrorResponseGeneratorInterface::class)->generate($e, (new ServerRequestFactory)());
+            }
        );
     }
     
@@ -43,18 +46,9 @@ final class RequestHandlerRunnerFactory
             return $c->get('serverRequestFactory');
         }
         
-        return [$this->getServerRequestCreator(), 'fromGlobals'];
+        return new ServerRequestFactory;
     }
     
-    private function getErrorResponseGenerator(ContainerInterface $c): callable
-    {
-        $generator = $c->get(ErrorResponseGeneratorInterface::class);
-
-        return function(\Throwable $e) use ($generator): ResponseInterface
-        {
-            return $generator->generate($e, $this->getServerRequestCreator->fromGlobals());
-        };
-    }
     
     private function getServerRequestCreator(): ServerRequestCreator
     {
