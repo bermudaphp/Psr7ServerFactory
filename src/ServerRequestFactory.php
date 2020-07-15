@@ -20,7 +20,7 @@ final class ServerRequestFactory
     {
         if ($c != null && $c->has('serverRequestFactory'))
         {  
-            return $c->get('serverRequestFactory');
+            return $c->get('serverRequestFactory')();
         }
         
         return (new ServerRequestCreator($factory = new Psr17Factory(), $factory, $factory, $factory))->fromGlobals();
