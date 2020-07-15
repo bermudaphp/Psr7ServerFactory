@@ -4,7 +4,6 @@
 namespace Bermuda\RequestHandlerRunner;
 
 
-use Psr\Container\ContainerInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,7 +15,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class ServerRequestFactory
 {
-    public function __invoke(ContainerInterface $c = null): ServerRequestInterface
+    public function __invoke(): ServerRequestInterface
     {
         return (new ServerRequestCreator($factory = new Psr17Factory(), $factory, $factory, $factory))->fromGlobals();
     }
