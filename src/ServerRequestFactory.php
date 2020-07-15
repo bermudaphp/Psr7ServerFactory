@@ -18,11 +18,6 @@ final class ServerRequestFactory
 {
     public function __invoke(ContainerInterface $c = null): ServerRequestInterface
     {
-        if ($c != null && $c->has('serverRequestFactory'))
-        {  
-            return $c->get('serverRequestFactory')();
-        }
-        
         return (new ServerRequestCreator($factory = new Psr17Factory(), $factory, $factory, $factory))->fromGlobals();
     }
 }
