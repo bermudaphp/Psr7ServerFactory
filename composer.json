@@ -9,7 +9,8 @@
     "require": {
         "php": ">= 7.4",
         "psr/container": "^1.0",
-        "nyholm/psr7-server": "^1.0.0",
+        "nyholm/psr7": "^1.3",
+        "nyholm/psr7-server": "^1.0",
         "bermudaphp/pipeline": "^1.0",
         "bermudaphp/error-handler": "^1.0",
         "laminas/laminas-httphandlerrunner": "^1.0"
