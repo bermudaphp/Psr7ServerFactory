@@ -3,6 +3,7 @@
 namespace Bermuda\RequestHandlerRunner;
 
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Bermuda\Pipeline\PipelineInterface;
 use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
@@ -17,7 +18,10 @@ final class RequestHandlerRunnerFactory
     public function __invoke(ContainerInterface $container): RequestHandlerRunner
     {
        return new RequestHandlerRunner($container->get(PipelineInterface::class), $container->get(EmitterInterface::class),
-            $container->get(ServerRequestFactory::class), $this->responseGenerator($container)
+            static function() use ($container)
+            {
+                return (new ServerRequestFactory())->__invoke($container);
+            }, $this->responseGenerator($container)
        );
     }
     
@@ -26,6 +30,6 @@ final class RequestHandlerRunnerFactory
         return static function(\Throwable $e) use ($container): ResponseInterface
         {
             return $container->get(ErrorResponseGeneratorInterface::class)->generate($e, ServerRequestFactory::fromGlobals());
-        }
+        };
     }
 }
