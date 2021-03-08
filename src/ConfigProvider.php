@@ -16,6 +16,7 @@ final class ConfigProvider extends \Bermuda\Config\ConfigProvider
     protected function getFactories(): array
     {
         return [
+            ServerRequestInterface::class => ServerRequestFactory
             RequestFactoryInterface::class => Psr17Factory::class,
             UriFactoryInterface::class => Psr17Factory::class,
             ServerRequestFactoryInterface::class => Psr17Factory::class,
