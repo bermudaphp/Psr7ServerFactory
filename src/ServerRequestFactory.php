@@ -25,10 +25,15 @@ final class ServerRequestFactory
         
         catch(\Throwable $e)
         {
-            return (new ServerRequestCreator(
+            return self::fromGlobals();
+        }
+    }
+    
+    public static function fromGlobals(): ServerRequestInterface
+    {
+        return (new ServerRequestCreator(
                 $psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory(),
                 $psr17Factory, $psr17Factory, $psr17Factory
-            ))->fromGlobals();
-        }
+        ))->fromGlobals();
     }
 }
