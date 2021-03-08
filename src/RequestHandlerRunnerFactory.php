@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Bermuda\RequestHandlerRunner;
-
 
 use Psr\Container\ContainerInterface;
 use Bermuda\Pipeline\PipelineInterface;
 use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Bermuda\ErrorHandler\ErrorResponseGeneratorInterface;
-
 
 /**
  * Class RequestHandlerRunnerFactory
