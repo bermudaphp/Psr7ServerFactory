@@ -16,15 +16,19 @@ final class ConfigProvider extends \Bermuda\Config\ConfigProvider
     protected function getFactories(): array
     {
         return [
-            ServerRequestInterface::class => ServerRequestFactory
-            RequestFactoryInterface::class => Psr17Factory::class,
-            UriFactoryInterface::class => Psr17Factory::class,
-            ServerRequestFactoryInterface::class => Psr17Factory::class,
-            ResponseFactoryInterface::class => Psr17Factory::class,
-            UploadedFileFactoryInterface::class => Psr17Factory::class,
-            StreamFactoryInterface::class => Psr17Factory::class,
             EmitterInterface::class => EmitterFactory::class,
             RequestHandlerRunner::class => RequestHandlerRunnerFactory::class,
+        ];
+    }
+    
+    protected function getInvokables(): array
+    {
+        return [
+            UriFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
+            ServerRequestFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
+            ResponseFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
+            UploadedFileFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
+            StreamFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
         ];
     }
 }
