@@ -24,11 +24,11 @@ final class ConfigProvider extends \Bermuda\Config\ConfigProvider
     protected function getInvokables(): array
     {
         return [
-            UriFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
-            ServerRequestFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
-            ResponseFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
-            UploadedFileFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
-            StreamFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory,
+            UriFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory::class,
+            ServerRequestFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory::class,
+            ResponseFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory::class,
+            UploadedFileFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory::class,
+            StreamFactoryInterface::class => \Nyholm\Psr7\Factory\Psr17Factory::class,
         ];
     }
 }
