@@ -3,6 +3,7 @@
 namespace Bermuda\RequestHandlerRunner;
 
 use Nyholm\Psr7Server\ServerRequestCreator;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
