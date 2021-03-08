@@ -14,33 +14,18 @@ use Bermuda\ErrorHandler\ErrorResponseGeneratorInterface;
  */
 final class RequestHandlerRunnerFactory
 {
-    public function __invoke(ContainerInterface $c): RequestHandlerRunner
+    public function __invoke(ContainerInterface $container): RequestHandlerRunner
     {
-       return new RequestHandlerRunner($c->get(PipelineInterface::class), $this->getEmitter($c),
-            $this->getServerRequestFactory($c), static function(\Throwable $e) use ($c): ResponseInterface
-            {
-                return $c->get(ErrorResponseGeneratorInterface::class)->generate($e, (new ServerRequestFactory)());
-            }
+       return new RequestHandlerRunner($container->get(PipelineInterface::class), $container->get(EmitterInterface::class),
+            $container->get(ServerRequestFactory::class), $this->responseGenerator($container)
        );
     }
     
-    private function getEmitter(ContainerInterface $c): EmitterInterface
+    private function responseGenerator(ContainerInterface $container): callable
     {
-        if($c->has(EmitterInterface::class))
+        return static function(\Throwable $e) use ($container): ResponseInterface
         {
-            return $c->get(EmitterInterface::class);
+            return $container->get(ErrorResponseGeneratorInterface::class)->generate($e, ServerRequestFactory::fromGlobals());
         }
-        
-        return (new EmitterFactory)($c);
-    }
-    
-    private function getServerRequestFactory(ContainerInterface $c): callable
-    {
-        if($c->has('serverRequestFactory'))
-        {
-            return $c->get('serverRequestFactory');
-        }
-        
-        return new ServerRequestFactory;
     }
 }
