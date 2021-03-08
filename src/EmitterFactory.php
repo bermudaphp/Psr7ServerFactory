@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Bermuda\RequestHandlerRunner;
-
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -11,19 +9,18 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterStack;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiStreamEmitter;
 
-
 /**
  * Class EmitterFactory
  * @package Bermuda\RequestHandlerRunner
  */
 final class EmitterFactory
 {
-    public function __invoke(ContainerInterface $c): EmitterInterface
+    public function __invoke(ContainerInterface $container): EmitterInterface
     {
         $stack = new EmitterStack();
         
         $stack->push(new SapiEmitter);
-        $stack->push(new class(new SapiStreamEmitter($this->getMaxBufferLength($c))) implements EmitterInterface
+        $stack->push(new class(new SapiStreamEmitter($this->getMaxBufferLength($container))) implements EmitterInterface
         {
             private $emitter;
 
@@ -46,8 +43,13 @@ final class EmitterFactory
         return $stack;
     }
     
-    private function getMaxBufferLength(ContainerInterface $c): int
+    private function getMaxBufferLength(ContainerInterface $container): int
     {
+        if ($container->has('emitter.maxBufferLength'))
+        {
+            return $container->get('emitter.maxBufferLength');
+        }
+        
         return 8192;
     }
 }
