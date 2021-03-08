@@ -1,4 +1,4 @@
 # Install
 ```bash
-composer require bermudaphp/http-factories
+composer require bermudaphp/request-handler-factory
 ````
