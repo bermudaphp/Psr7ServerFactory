@@ -11,7 +11,7 @@ use Laminas\HttpHandlerRunner\Emitter\SapiStreamEmitter;
 
 /**
  * Class EmitterFactory
- * @package Bermuda\RequestHandlerRunner
+ * @package Bermuda\PSR7ServerFactory
  */
 final class EmitterFactory
 {
