@@ -8,8 +8,8 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
-use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
+use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 
 final class ConfigProvider extends \Bermuda\Config\ConfigProvider
 {
@@ -17,7 +17,7 @@ final class ConfigProvider extends \Bermuda\Config\ConfigProvider
     {
         return [
             EmitterInterface::class => EmitterFactory::class,
-            RequestHandlerRunner::class => RequestHandlerRunnerFactory::class,
+            ServerRequestCreatorIntreface::class => ServerRequestCreatorFactory::class,
         ];
     }
     
