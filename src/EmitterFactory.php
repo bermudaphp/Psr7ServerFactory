@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda\RequestHandlerRunner;
+namespace Bermuda\PSR7ServerFactory;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -45,11 +45,13 @@ final class EmitterFactory
     
     private function getMaxBufferLength(ContainerInterface $container): int
     {
-        if ($container->has('emitter.maxBufferLength'))
-        {
-            return $container->get('emitter.maxBufferLength');
+        try {
+            return $container->get('config')['emitter.maxBufferLength'] ?? 8192;
         }
         
-        return 8192;
+        catch(\Throwable $e)
+        {
+            return 8192;
+        }
     }
 }
