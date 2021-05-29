@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda\RequestHandlerRunner;
+namespace Bermuda\PSR7ServerFactory;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
