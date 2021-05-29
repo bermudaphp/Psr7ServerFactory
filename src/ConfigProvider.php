@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda\RequestHandlerRunner;
+namespace Bermuda\PSR7ServerFactory;
 
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
