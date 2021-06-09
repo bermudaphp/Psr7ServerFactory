@@ -19,12 +19,13 @@ use Psr\Http\Message\UriInterface;
  */
 final class Psr17Factory implements ServerRequestFactoryInterface,
     UriFactoryInterface, StreamFactoryInterface, ResponseFactoryInterface,
-    RequestFactoryInterface
+    RequestFactoryInterface,UploadedFileFactoryInterface
 {
     private ?UriFactoryInterface $uriFactory = null;
     private ?StreamFactoryInterface $streamFactory = null;
     private ?RequestFactoryInterface $requestFactory = null;
     private ?ResponseFactoryInterface $responseFactory = null;
+    private ?UploadedFileFactoryInterface $uploadedFileFactory;
     private ?ServerRequestFactoryInterface $serverRequestFactory = null;
 
     public function __construct()
@@ -35,16 +36,18 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
                 $this->uriFactory =
                 $this->responseFactory =
                 $this->requestFactory =
+                $this->uploadedFileFactory =
                 $this->streamFactory = new \Nyholm\Psr7\Factory\Psr17Factory;
         }
 
         elseif (class_exists('\Laminas\Diactoros\RequestFactory'))
         {
-            $this->uriFactory = new \Laminas\Diactoros\UriFactory();
-            $this->streamFactory = new \Laminas\Diactoros\StreamFactory();
-            $this->requestFactory = new \Laminas\Diactoros\RequestFactory();
-            $this->responseFactory = new \Laminas\Diactoros\ResponseFactory();
-            $this->serverRequestFactory = new \Laminas\Diactoros\ServerRequestFactory();
+            $this->uriFactory = new \Laminas\Diactoros\UriFactory;
+            $this->streamFactory = new \Laminas\Diactoros\StreamFactory;
+            $this->requestFactory = new \Laminas\Diactoros\RequestFactory;
+            $this->responseFactory = new \Laminas\Diactoros\ResponseFactory;
+            $this->uploadedFileFactory = new \Laminas\Diactoros\UploadedFileFactory;
+            $this->serverRequestFactory = new \Laminas\Diactoros\ServerRequestFactory;
         }
     }
 
@@ -144,5 +147,19 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
         }
 
         throw new \RuntimeException('No available PSR-7 Request implementation');
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \RuntimeException
+     */
+    public function createUploadedFile(StreamInterface $stream, int $size = null, int $error = \UPLOAD_ERR_OK, string $clientFilename = null, string $clientMediaType = null): UploadedFileInterface
+    {
+        if ($this->uploadedFileFactory)
+        {
+            return $this->uploadedFileFactory->createUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
+        }
+
+        throw new \RuntimeException('No available PSR-7 Uploaded file implementation');
     }
 }
