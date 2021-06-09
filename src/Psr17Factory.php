@@ -2,11 +2,6 @@
 
 namespace Bermuda\PSR7ServerFactory;
 
-use Laminas\Diactoros\RequestFactory;
-use Laminas\Diactoros\ResponseFactory;
-use Laminas\Diactoros\ServerRequestFactory;
-use Laminas\Diactoros\StreamFactory;
-use Laminas\Diactoros\UriFactory;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -17,7 +12,6 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use Nyholm\Psr7\Factory\Psr17Factory as NyholmPsr17Factory;
 
 /**
  * Class Psr17Factory
@@ -35,22 +29,22 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
 
     public function __construct()
     {
-        if (class_exists(NyholmPsr17Factory::class))
+        if (class_exists('Nyholm\Psr7\Factory\Psr17Factory'))
         {
             $this->serverRequestFactory =
                 $this->uriFactory =
                 $this->responseFactory =
                 $this->requestFactory =
-                $this->streamFactory = new NyholmPsr17Factory;
+                $this->streamFactory = new \Nyholm\Psr7\Factory\Psr17Factory;
         }
 
-        elseif (class_exists(RequestFactory::class))
+        elseif (class_exists('\Laminas\Diactoros\RequestFactory'))
         {
-            $this->uriFactory = new UriFactory();
-            $this->streamFactory = new StreamFactory();
-            $this->requestFactory = new RequestFactory();
-            $this->responseFactory = new ResponseFactory();
-            $this->serverRequestFactory = new ServerRequestFactory();
+            $this->uriFactory = new \Laminas\Diactoros\UriFactory();
+            $this->streamFactory = new \Laminas\Diactoros\StreamFactory();
+            $this->requestFactory = new \Laminas\Diactoros\RequestFactory();
+            $this->responseFactory = new \Laminas\Diactoros\ResponseFactory();
+            $this->serverRequestFactory = new \Laminas\Diactoros\ServerRequestFactory();
         }
     }
 
