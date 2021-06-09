@@ -2,7 +2,6 @@
 
 namespace Bermuda\PSR7ServerFactory;
 
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\RequestFactoryInterface;
