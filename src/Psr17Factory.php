@@ -10,6 +10,8 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileFactoryInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -19,7 +21,7 @@ use Psr\Http\Message\UriInterface;
  */
 final class Psr17Factory implements ServerRequestFactoryInterface,
     UriFactoryInterface, StreamFactoryInterface, ResponseFactoryInterface,
-    RequestFactoryInterface,UploadedFileFactoryInterface
+    RequestFactoryInterface, UploadedFileFactoryInterface
 {
     private ?UriFactoryInterface $uriFactory = null;
     private ?StreamFactoryInterface $streamFactory = null;
@@ -155,11 +157,11 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createUploadedFile(StreamInterface $stream, int $size = null, int $error = \UPLOAD_ERR_OK, string $clientFilename = null, string $clientMediaType = null): UploadedFileInterface
     {
-        if ($this->uploadedFileFactory)
-        {
-            return $this->uploadedFileFactory->createUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
-        }
+       if ($this->uploadedFileFactory)
+       {
+           return $this->uploadedFileFactory->createUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
+       }
 
-        throw new \RuntimeException('No available PSR-7 Uploaded file implementation');
-    }
+       throw new \RuntimeException('No available PSR-7 Uploaded file implementation');
+   }
 }
