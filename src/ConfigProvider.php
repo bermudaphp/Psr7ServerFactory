@@ -11,10 +11,6 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 
-/**
- * Class ConfigProvider
- * @package Bermuda\PSR7ServerFactory
- */
 final class ConfigProvider extends \Bermuda\Config\ConfigProvider
 {
     protected function getFactories(): array
@@ -26,6 +22,13 @@ final class ConfigProvider extends \Bermuda\Config\ConfigProvider
     }
     
     protected function getInvokables(): array
+    {
+        return [
+            Psr17Factory::class => Psr17Factory::class
+        ];
+    }
+    
+    protected function getAliases(): array
     {
         return [
             UriFactoryInterface::class => Psr17Factory::class,
