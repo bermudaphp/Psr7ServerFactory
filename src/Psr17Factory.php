@@ -15,10 +15,6 @@ use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
-/**
- * Class Psr17Factory
- * @package Bermuda\PSR7ServerFactory
- */
 final class Psr17Factory implements ServerRequestFactoryInterface,
     UriFactoryInterface, StreamFactoryInterface, ResponseFactoryInterface,
     RequestFactoryInterface, UploadedFileFactoryInterface
@@ -32,18 +28,14 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
 
     public function __construct()
     {
-        if (class_exists('Nyholm\Psr7\Factory\Psr17Factory'))
-        {
+        if (class_exists('Nyholm\Psr7\Factory\Psr17Factory')) {
             $this->serverRequestFactory =
                 $this->uriFactory =
                 $this->responseFactory =
                 $this->requestFactory =
                 $this->uploadedFileFactory =
                 $this->streamFactory = new \Nyholm\Psr7\Factory\Psr17Factory;
-        }
-
-        elseif (class_exists('\Laminas\Diactoros\RequestFactory'))
-        {
+        } elseif (class_exists('\Laminas\Diactoros\RequestFactory')) {
             $this->uriFactory = new \Laminas\Diactoros\UriFactory;
             $this->streamFactory = new \Laminas\Diactoros\StreamFactory;
             $this->requestFactory = new \Laminas\Diactoros\RequestFactory;
@@ -59,8 +51,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
     {
-        if ($this->responseFactory)
-        {
+        if ($this->responseFactory) {
             return $this->responseFactory->createResponse($code, $reasonPhrase);
         }
 
@@ -73,8 +64,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
-        if ($this->serverRequestFactory)
-        {
+        if ($this->serverRequestFactory) {
             return $this->serverRequestFactory->createServerRequest($method, $uri, $serverParams);
         }
 
@@ -87,8 +77,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createStream(string $content = ''): StreamInterface
     {
-        if ($this->streamFactory)
-        {
+        if ($this->streamFactory) {
             return $this->streamFactory->createStream($content);
         }
 
@@ -101,8 +90,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createStreamFromFile(string $filename, string $mode = 'r'): StreamInterface
     {
-        if ($this->streamFactory)
-        {
+        if ($this->streamFactory) {
             return $this->streamFactory->createStreamFromFile($filename, $mode);
         }
 
@@ -115,8 +103,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createStreamFromResource($resource): StreamInterface
     {
-        if ($this->streamFactory)
-        {
+        if ($this->streamFactory) {
             return $this->streamFactory->createStreamFromResource($resource);
         }
 
@@ -129,8 +116,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createUri(string $uri = ''): UriInterface
     {
-        if ($this->uriFactory)
-        {
+        if ($this->uriFactory) {
             return $this->uriFactory->createUri($uri);
         }
 
@@ -143,8 +129,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createRequest(string $method, $uri): RequestInterface
     {
-        if ($this->requestFactory)
-        {
+        if ($this->requestFactory) {
             return $this->requestFactory->createRequest($method, $uri);
         }
 
@@ -157,8 +142,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      */
     public function createUploadedFile(StreamInterface $stream, int $size = null, int $error = \UPLOAD_ERR_OK, string $clientFilename = null, string $clientMediaType = null): UploadedFileInterface
     {
-       if ($this->uploadedFileFactory)
-       {
+       if ($this->uploadedFileFactory) {
            return $this->uploadedFileFactory->createUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
        }
 
