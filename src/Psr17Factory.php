@@ -140,7 +140,7 @@ final class Psr17Factory implements ServerRequestFactoryInterface,
      * @inheritDoc
      * @throws \RuntimeException
      */
-    public function createUploadedFile(StreamInterface $stream, int $size = null, int $error = \UPLOAD_ERR_OK, string $clientFilename = null, string $clientMediaType = null): UploadedFileInterface
+    public function createUploadedFile(StreamInterface $stream, ?int $size = null, int $error = \UPLOAD_ERR_OK, ?string $clientFilename = null, ?string $clientMediaType = null): UploadedFileInterface
     {
        if ($this->uploadedFileFactory) {
            return $this->uploadedFileFactory->createUploadedFile($stream, $size, $error, $clientFilename, $clientMediaType);
